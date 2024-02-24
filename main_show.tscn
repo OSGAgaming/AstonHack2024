@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjwojl0g4sxyi"]
+[gd_scene load_steps=21 format=3 uid="uid://cjwojl0g4sxyi"]
 
 [ext_resource type="Script" path="res://CharacterMovement.gd" id="1_7q0qh"]
 [ext_resource type="Shader" path="res://main_show.gdshader" id="1_bayse"]
 [ext_resource type="Script" path="res://Textbox.gd" id="3_01ue1"]
 [ext_resource type="FontFile" uid="uid://bbcudyomqdi2w" path="res://Fonts/NESCyrillic.ttf" id="4_nggtj"]
+[ext_resource type="Script" path="res://Input.gd" id="5_pww7x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pd3w4"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -43,6 +44,17 @@ data = PackedVector3Array(-6.9125, 0.1875, 8.575, 6.9125, 0.1875, 8.575, -6.9125
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_no400"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ll4f4"]
+bg_color = Color(0.231373, 0.231373, 0.231373, 1)
+
+[sub_resource type="Theme" id="Theme_wo70w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy620"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rucis"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Node3D" type="Node3D"]
 
@@ -145,3 +157,31 @@ size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_nggtj")
 theme_override_font_sizes/font_size = 29
 text = "v"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/TextboxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ll4f4")
+
+[node name="InputContainer" type="HBoxContainer" parent="CanvasLayer/TextboxContainer/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 2
+offset_right = 484.0
+offset_bottom = 31.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TextboxContainer/MarginContainer/VBoxContainer/Panel/InputContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_nggtj")
+theme_override_font_sizes/font_size = 29
+text = ">"
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/TextboxContainer/MarginContainer/VBoxContainer/Panel/InputContainer"]
+layout_mode = 2
+theme = SubResource("Theme_wo70w")
+theme_override_fonts/font = ExtResource("4_nggtj")
+theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("StyleBoxFlat_hy620")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rucis")
+expand_to_text_length = true
+script = ExtResource("5_pww7x")
+
+[connection signal="text_submitted" from="CanvasLayer/TextboxContainer/MarginContainer/VBoxContainer/Panel/InputContainer/LineEdit" to="CanvasLayer/TextboxContainer/MarginContainer/VBoxContainer/Panel/InputContainer/LineEdit" method="_on_text_submitted"]
