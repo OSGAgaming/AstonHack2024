@@ -42,7 +42,7 @@ func _ready():
 func _process(delta):
 	match current_state:
 		State.READY:
-			if !text_queue.is_empty():
+			if !text_queue.is_empty() && !Global.isGameMenu:
 				display_text()
 		State.READING:
 			label.visible_ratio += delta

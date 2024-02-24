@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cjwojl0g4sxyi"]
+[gd_scene load_steps=30 format=3 uid="uid://cjwojl0g4sxyi"]
 
 [ext_resource type="Script" path="res://CharacterMovement.gd" id="1_7q0qh"]
 [ext_resource type="Shader" path="res://main_show.gdshader" id="1_bayse"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Input.gd" id="5_pww7x"]
 [ext_resource type="Script" path="res://Menu.gd" id="7_b0vs7"]
 [ext_resource type="Script" path="res://SlideLeftRightReciprocal.gd" id="8_tvn73"]
+[ext_resource type="Script" path="res://Play.gd" id="9_0bocy"]
 [ext_resource type="Script" path="res://Control2.gd" id="10_12o7b"]
 [ext_resource type="Script" path="res://Control3.gd" id="11_kotd5"]
 
@@ -233,6 +234,7 @@ theme_override_fonts/font = ExtResource("4_nggtj")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_y4wqf")
 text = "Play"
+script = ExtResource("9_0bocy")
 
 [node name="Control2" type="Control" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
