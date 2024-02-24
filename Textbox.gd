@@ -6,6 +6,8 @@ const CHAR_READ_RATE = 0.05
 @onready var start_symbol = $TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer/Start
 @onready var end_symbol = $TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer/End
 @onready var label = $TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer/Label
+@onready var requestManager = $HTTPRequest
+
 
 var tween : Tween = Tween.new()
 enum State {
@@ -19,7 +21,9 @@ var text_queue = []
 
 func _ready():
 	hide_textbox()
-	queue_text("Excuse me wanderer where can I find the bathroom?")
+	requestManager.send_message("Where am i??")
+	await requestManager.request_completed
+	queue_text(requestManager.prev_response)
 	queue_text("Why do we not look like the others?")
 	queue_text("Because we are free assets from opengameart!")
 	queue_text("Thanks for watching!")
