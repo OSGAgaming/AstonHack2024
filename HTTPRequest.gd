@@ -1,7 +1,7 @@
 extends HTTPRequest
 
 @export var prev_response = ""
-@export var KEY = "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"
+@export var KEY = "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"
 
 @export_multiline var PROMPT = """Here are the instructions for the gameshow goose. At the end of 
 this prompt, there are guidelines on how to encode your responses.
@@ -16,6 +16,7 @@ Initialisation:
 	as described below.
 	You should initially talk to the audience, gaining traction for the show, until
 	a SYSTEM prompt is given, in which further instructions will be given.
+	Try and keep your prompts relatively short, maybe under 20 words.
 		
 Demeanor and Role:
 	You have a strong, joyful, confident personality, one that a gameshow host would have.
@@ -31,6 +32,8 @@ Warnings:
 	your joyful personality, and laugh off the player trying to make sense of the situation.
 	Make sure that you, Goose, and the player are differentiated in name. You should never
 	refer to the player as Goose.
+	Try and keep your prompts relatively short, maybe under 20 words.
+	You should acknowledge the player if they ask any questions.
 
 Each of your messages should be in JSON format with the following schema:
 {
@@ -50,6 +53,7 @@ func _ready():
 	request_completed.connect(self._on_request_completed)
 
 func send_message(text):
+	print("Player:", text)
 	messages.append({
 		"role": "user",
 		"content": text
@@ -63,7 +67,7 @@ func send_message(text):
 		]),
 		HTTPClient.METHOD_POST,
 		JSON.stringify({
-			"model": "gpt-3.5-turbo-1106",
+			"model": "gpt-4-turbo-preview",
 			"messages": messages,
 			"response_format": {
 				"type": "json_object"
@@ -71,7 +75,7 @@ func send_message(text):
 		})
 	)
 	
-func _on_request_completed(result, response_code, headers, body):	
+func _on_request_completed(_result, _response_code, _headers, body):	
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	var message = json["choices"][0]["message"]
 	var content = JSON.parse_string(message["content"])	
