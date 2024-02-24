@@ -42,4 +42,4 @@ func _physics_process(delta):
 
 func _ready():
 	eyes.rotate_y(180)
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
