@@ -22,6 +22,7 @@ var current_state = State.READY
 var text_queue = []
 
 func _ready():
+	hide_textbox()
 	if true:
 		goose_talk()
 
@@ -42,7 +43,6 @@ func _process(delta):
 				hide_textbox()
 
 func goose_talk():
-	hide_textbox()
 	requestManager.prompt()
 	await requestManager.request_completed
 	queue_text(requestManager.prev_response)
