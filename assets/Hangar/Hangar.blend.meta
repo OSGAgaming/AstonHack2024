@@ -1,0 +1,167 @@
+fileFormatVersion: 2
+guid: 7ef8ff8a78a898346a5a6634b7cf8588
+timeCreated: 1524866972
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Door_Left
+    100002: Door_Right
+    100004: Door_Tubes
+    100006: //RootNode
+    100008: Hangar_Armor
+    100010: Tube
+    400000: Door_Left
+    400002: Door_Right
+    400004: Door_Tubes
+    400006: //RootNode
+    400008: Hangar_Armor
+    400010: Tube
+    2100000: Walls__Hangar_wall_jpg
+    2100002: Ground__MarbleWhite2_1024_diffuse_tiff
+    2100004: Ceil__Ceiling_jpg
+    2100006: Door__DoorsMetalDouble0256_M_jpg
+    2100008: Door__Untitled_001
+    2100010: MetalBulks__MetalBulkh_jpg
+    2100012: Tubes__Pipes0089_S_jpg
+    2100014: Metals__Metals_blue_jpg
+    2300000: Door_Left
+    2300002: Door_Right
+    2300004: Door_Tubes
+    2300006: //RootNode
+    2300008: Hangar_Armor
+    2300010: Tube
+    3300000: Door_Left
+    3300002: Door_Right
+    3300004: Door_Tubes
+    3300006: //RootNode
+    3300008: Hangar_Armor
+    3300010: Tube
+    4300000: Hangar_Base
+    4300002: Door_Left
+    4300004: Door_Right
+    4300006: Door_Tubes
+    4300008: Tube
+    4300010: Hangar_Armor
+    7400000: Default Take
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ceil__Ceiling_jpg
+    second: {fileID: 2100000, guid: 56cfa6cea38df5f4983393b995bae970, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door__DoorsMetalDouble0256_M_jpg
+    second: {fileID: 2100000, guid: 29bd878f278fc0a4fbf4c411230207e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door__Untitled_001
+    second: {fileID: 2100000, guid: 342c54adb5541ca448409d60b667f2f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground__MarbleWhite2_1024_diffuse_tiff
+    second: {fileID: 2100000, guid: d942571a036170344b6e3a9a28c3ef95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalBulks__MetalBulkh_jpg
+    second: {fileID: 2100000, guid: e047b1a651ed0e2459daa12e7c5b416f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metals__Metals_blue_jpg
+    second: {fileID: 2100000, guid: 405e9babc5c4cef498e7ce61b8e0e1c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tubes__Pipes0089_S_jpg
+    second: {fileID: 2100000, guid: 3204c00038104aa44ab1d0f0c4b88288, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Walls__Hangar_wall_jpg
+    second: {fileID: 2100000, guid: cb391a77e8f4c1e4cbd6a5321ccad3fd, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

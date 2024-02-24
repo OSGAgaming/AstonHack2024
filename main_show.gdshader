@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode unshaded;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear;
-const int pixel_size = 6;
+const int pixel_size = 3;
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
