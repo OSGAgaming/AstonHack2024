@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjwojl0g4sxyi"]
+[gd_scene load_steps=13 format=3 uid="uid://cjwojl0g4sxyi"]
 
 [ext_resource type="Script" path="res://CharacterMovement.gd" id="1_7q0qh"]
 [ext_resource type="Shader" path="res://main_show.gdshader" id="1_bayse"]
@@ -39,19 +39,6 @@ size = Vector3(13.825, 0.375, 17.15)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d8dk2"]
 data = PackedVector3Array(-6.9125, 0.1875, 8.575, 6.9125, 0.1875, 8.575, -6.9125, -0.1875, 8.575, 6.9125, 0.1875, 8.575, 6.9125, -0.1875, 8.575, -6.9125, -0.1875, 8.575, 6.9125, 0.1875, -8.575, -6.9125, 0.1875, -8.575, 6.9125, -0.1875, -8.575, -6.9125, 0.1875, -8.575, -6.9125, -0.1875, -8.575, 6.9125, -0.1875, -8.575, 6.9125, 0.1875, 8.575, 6.9125, 0.1875, -8.575, 6.9125, -0.1875, 8.575, 6.9125, 0.1875, -8.575, 6.9125, -0.1875, -8.575, 6.9125, -0.1875, 8.575, -6.9125, 0.1875, -8.575, -6.9125, 0.1875, 8.575, -6.9125, -0.1875, -8.575, -6.9125, 0.1875, 8.575, -6.9125, -0.1875, 8.575, -6.9125, -0.1875, -8.575, 6.9125, 0.1875, 8.575, -6.9125, 0.1875, 8.575, 6.9125, 0.1875, -8.575, -6.9125, 0.1875, 8.575, -6.9125, 0.1875, -8.575, 6.9125, 0.1875, -8.575, -6.9125, -0.1875, 8.575, 6.9125, -0.1875, 8.575, -6.9125, -0.1875, -8.575, 6.9125, -0.1875, 8.575, 6.9125, -0.1875, -8.575, -6.9125, -0.1875, -8.575)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_j10nf"]
-bottom_radius = 0.2
-height = 10.911
-
-[sub_resource type="BoxMesh" id="BoxMesh_gi2yv"]
-size = Vector3(13.825, 0.375, 17.15)
-
-[sub_resource type="BoxMesh" id="BoxMesh_18obx"]
-size = Vector3(26.065, 0.335, 17.15)
-
-[sub_resource type="BoxMesh" id="BoxMesh_y3cq6"]
-size = Vector3(26.065, 0.335, 17.15)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -77,7 +64,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743266, 0)
 [node name="View" type="Camera3D" parent="CharacterBody3D/Eyes"]
 
 [node name="PixelationFilter" type="MeshInstance3D" parent="CharacterBody3D/Eyes/View"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0120974, 0, -1.55513)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0120974, -0.00672293, -1.55513)
 mesh = SubResource("BoxMesh_b6qnb")
 surface_material_override/0 = SubResource("ShaderMaterial_qh77u")
 
@@ -89,51 +76,9 @@ mesh = SubResource("BoxMesh_8xbak")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Stadium/MeshInstance3D"]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stadium/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_d8dk2")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(1.08126, -0.383168, 1.09471, -0.276401, 0.773555, 1.01573, -1.24436, -0.504772, 0.725607, 8.26051, 3.80706, 10.5811)
-mesh = SubResource("CylinderMesh_j10nf")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(-1.5514, -0.331812, 0.280069, -0.276401, 0.773555, 1.01573, -0.557418, 0.539919, -1.28314, 7.88628, 3.80706, -10.6167)
-mesh = SubResource("CylinderMesh_j10nf")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(-1.1863, 0.337389, -1.0268, -0.276401, 0.773555, 1.01573, 1.14466, 0.536452, -0.818884, -7.84915, 3.80706, -10.6167)
-mesh = SubResource("CylinderMesh_j10nf")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(1.57951, 0.301847, -0.209612, -0.276401, 0.773555, 1.01573, 0.471905, -0.557226, 1.29651, -7.84915, 3.80706, 10.616)
-mesh = SubResource("CylinderMesh_j10nf")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.11143, 0)
-mesh = SubResource("BoxMesh_gi2yv")
-skeleton = NodePath("../..")
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(0.37848, 0, 0, 0, -0.245597, -0.287974, 0, 0.287974, -0.245597, 1.31318, 1.59039, 6.67019)
-mesh = SubResource("BoxMesh_18obx")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(0.37848, 0, 0, 0, 0.297247, -0.234288, 0, 0.234288, 0.297247, 1.667, 1.16526, -5.47694)
-mesh = SubResource("BoxMesh_18obx")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(-1.65439e-08, -0.161149, 0.342459, 0, 0.342459, 0.161149, -0.37848, 7.04404e-09, -1.49693e-08, 6.72579, 1.16526, 0.492792)
-mesh = SubResource("BoxMesh_y3cq6")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Stadium"]
-transform = Transform3D(8.10953e-09, -0.2189, -0.308045, -1.43909e-08, -0.308045, 0.2189, -0.377901, 7.03327e-09, -1.49464e-08, -4.54327, 1.16526, 0.492792)
-mesh = SubResource("BoxMesh_y3cq6")
-skeleton = NodePath("../..")
