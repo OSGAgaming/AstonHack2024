@@ -1,16 +1,13 @@
-extends Button
-
+extends Control
+@onready var button = $Options;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	button.position.x = 1200
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	button.position.x *= 0.92
 	pass
-
-
-func _on_pressed():
-	Global.isGameMenu = false;
-
