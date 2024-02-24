@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="AstonHack"
+run/main_scene="res://main_show.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="AstonHack"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
