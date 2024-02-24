@@ -22,7 +22,7 @@ var current_state = State.READY
 var text_queue = []
 
 func _ready():
-	if true:
+	if false:
 		goose_talk()
 
 func _process(delta):
