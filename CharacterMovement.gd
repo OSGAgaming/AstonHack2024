@@ -38,4 +38,5 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _ready():
+	eyes.rotate_y(180)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
