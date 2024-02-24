@@ -38,4 +38,5 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	pass
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

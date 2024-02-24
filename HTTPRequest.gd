@@ -1,7 +1,7 @@
 extends HTTPRequest
 
 @export var prev_response = ""
-@export var KEY = "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"
+@export var KEY = "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"
 
 @export_multiline var PROMPT = """Here are the instructions for the gameshow goose. At the end of 
 this prompt, there are guidelines on how to encode your responses.
