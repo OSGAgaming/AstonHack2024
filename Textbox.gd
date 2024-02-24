@@ -3,11 +3,11 @@ extends CanvasLayer
 const CHAR_READ_RATE = 0.05
 
 @onready var textbox_container = $TextboxContainer
-@onready var start_symbol = $TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer/Start
-@onready var end_symbol = $TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer/End
-@onready var label = $TextboxContainer/MarginContainer/VBoxContainer/HBoxContainer/Label
+@onready var start_symbol = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/Start
+@onready var end_symbol = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/End
+@onready var label = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/Label
 @onready var requestManager = $HTTPRequest
-@onready var input_txtBox = $TextboxContainer/MarginContainer/VBoxContainer/Panel/InputContainer/LineEdit
+@onready var input_txtBox = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/Panel/InputContainer/LineEdit
 
 signal sig_inputted_text
 var inputted_text = ""
