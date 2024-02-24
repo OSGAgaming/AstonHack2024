@@ -22,22 +22,8 @@ var current_state = State.READY
 var text_queue = []
 
 func _ready():
-	hide_textbox()
-	requestManager.send_message("SYSTEM: Ignore this system call. Proceed as if I just entered the room.")
-	await requestManager.request_completed
-	queue_text(requestManager.prev_response)
-	await sig_inputted_text
-	requestManager.send_message("SYSTEM: Begin asking questions about the gameshow. Treat the following as if the user had just inputted: " + inputted_text)
-	await requestManager.request_completed
-	
-	while(true):
-		await get_tree().create_timer(1.0).timeout
-		requestManager.send_message(inputted_text)
-		await requestManager.request_completed
-		queue_text(requestManager.prev_response)
-		print("Goose:", requestManager.prev_response)
-		input_txtBox.grab_focus()
-		await sig_inputted_text
+	if true:
+		goose_talk()
 
 func _process(delta):
 	match current_state:
@@ -54,6 +40,26 @@ func _process(delta):
 			if Input.is_action_just_pressed("Enter"):
 				change_state(State.READY)
 				hide_textbox()
+
+func goose_talk():
+	hide_textbox()
+	requestManager.prompt()
+	await requestManager.request_completed
+	queue_text(requestManager.prev_response)
+	input_txtBox.grab_focus()
+	await sig_inputted_text
+	requestManager.send_message("SYSTEM: Begin asking questions about the gameshow. Treat the following as if the user had just inputted: " + inputted_text)
+	await requestManager.request_completed
+	
+	while(true):
+		await get_tree().create_timer(1.0).timeout
+		requestManager.send_message(inputted_text)
+		await requestManager.request_completed
+		queue_text(requestManager.prev_response)
+		print("Goose:", requestManager.prev_response)
+		input_txtBox.grab_focus()
+		await sig_inputted_text
+	
 
 func queue_text(next_text):
 	Global.focused = true
@@ -77,5 +83,6 @@ func display_text():
 	show_textbox()
 
 func change_state(next_state):
+	if next_state == State.FINISHED:
+		input_txtBox.grab_focus()
 	current_state = next_state
-

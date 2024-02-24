@@ -11,7 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _unhandled_input(event):
 	if Global.isGameMenu: 
 		return;
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not Global.focused:
 		eyes.rotate_y(-0.01 * event.relative.x)
 		camera.rotate_x(-0.01 * event.relative.y)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))

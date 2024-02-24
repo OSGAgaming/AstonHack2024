@@ -13,5 +13,4 @@ func _process(delta):
 
 func _on_pressed():
 	Global.isGameMenu = false;
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pass # Replace with function body.
