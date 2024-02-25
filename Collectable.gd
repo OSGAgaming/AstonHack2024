@@ -1,9 +1,9 @@
 extends MeshInstance3D
 
-const description = "Looks like an id card";
+const description = "Looks like an id card. Press [E] to interact";
 const outDescription = "You just picked up an id card with your \n
 Name: woiuhgwergrwef \n 
-Date Of Birth: 05-04-1999"
+Date Of Birth: 05-04-1999. Press [E] to confirm"
 
 var within = false;
 var time = 0;
@@ -36,7 +36,7 @@ func _process(delta):
 			if not within:
 				Global.currentDescription = description;
 			within = true
-			if Input.is_action_just_pressed("Enter"):
+			if Input.is_action_just_pressed("E") && not Global.focused:
 				Global.inspecting = true;
 				Global.currentItem = outDescription
 				visible = false

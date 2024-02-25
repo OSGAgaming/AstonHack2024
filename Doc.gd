@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
-const description = "Looks like a bunch of formal documents";
-const outDescription = "A tenancy agreement under you and your significant other"
+const description = "Looks like a bunch of formal documents. Press [E] to confirm";
+const outDescription = "A tenancy agreement under you and your significant other. Press [E] to confirm"
 
 var within = false;
 var time = 0;
@@ -34,7 +34,7 @@ func _process(delta):
 			if not within:
 				Global.currentDescription = description;
 			within = true
-			if Input.is_action_just_pressed("Enter"):
+			if Input.is_action_just_pressed("E") && not Global.focused:
 				Global.inspecting = true;
 				Global.currentItem = outDescription
 				visible = false
