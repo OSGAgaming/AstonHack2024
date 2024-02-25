@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low Poly Green Running Man Exit Sign
+* source:	https://sketchfab.com/3d-models/low-poly-green-running-man-exit-sign-5f0889c3f49544ac86080148d423b943
+* author:	JeffK (https://sketchfab.com/jeffkolada)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low Poly Green Running Man Exit Sign" (https://sketchfab.com/3d-models/low-poly-green-running-man-exit-sign-5f0889c3f49544ac86080148d423b943) by JeffK (https://sketchfab.com/jeffkolada) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
