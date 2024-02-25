@@ -3,7 +3,7 @@ extends Button
 @onready var playCouroutineReady = false;
 @onready var playCouroutine = 0;
 @onready var centerStage = get_node("/root/Node3D/CenterStage")
-@onready var player = get_tree().get_root().get_node("Node3D/CharacterBody3D");
+@onready var player = get_tree().get_root().get_node("Node3D/player");
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
