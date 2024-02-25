@@ -4,10 +4,17 @@ extends Button
 @onready var playCouroutine = 0;
 @onready var centerStage = get_node("/root/Node3D/CenterStage")
 @onready var player = get_tree().get_root().get_node("Node3D/player");
+
+var music = preload("res://assets/gameshow.wav")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func play_music():
+	if !$AudioStreamPlayer2D.is_playing():
+		$AudioStreamPlayer2D.stream = music
+		$AudioStreamPlayer2D.play()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -18,12 +25,16 @@ func _process(delta):
 			player.position.z += delta
 			player.rotation.y -= 0.1 * delta
 		else:
+			play_music()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			Global.transitionAlpha = (3 -(playCouroutine - 3)) / 3
 			player.position.x = centerStage.position.x;
 			player.position.z = centerStage.position.z;
 			if playCouroutine >= 6:
 				Global.gameState = Global.GameState.Gameplay;
 				playCouroutineReady = false
+
+
 	pass
 
 
