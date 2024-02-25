@@ -9,7 +9,7 @@ const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _unhandled_input(event):
-	if Global.isGameMenu: 
+	if  	Global.gameState == Global.GameState.MainMenu: 
 		return;
 	if event is InputEventMouseMotion and not Global.focused:
 		eyes.rotate_y(-0.01 * event.relative.x)
@@ -17,7 +17,7 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 
 func _physics_process(delta):
-	if Global.isGameMenu: 
+	if 	Global.gameState == Global.GameState.MainMenu:
 		return;
 	# Add the gravity.
 	if not is_on_floor():
@@ -41,5 +41,5 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _ready():
-	eyes.rotate_y(180)
+	eyes.rotate_y(0)
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

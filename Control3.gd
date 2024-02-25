@@ -9,7 +9,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Global.isGameMenu:
-		button.position.x *= 0.92
+	if 	Global.gameState == Global.GameState.MainMenu:
+		button.position.x += (-20 - button.position.x) / 16
 	else:
 		button.position.x += (600 - button.position.x) / 16
