@@ -23,11 +23,7 @@ enum text_State {
 }
 enum goose_State {
 	WELCOME,
-	QUESTION1,
-	ANS_QUESTION1,
-	QUESTION2,
-	ANS_QUESTION2,
-	QUESTION3,
+	QUESTION,
 	RESULTS
 }
 
@@ -100,7 +96,6 @@ func goose_talk():
 		goose_handle_state()
 		await requestManager.request_completed
 		queue_text(requestManager.prev_response)
-		
 		await sig_inputted_text
 
 func queue_text(next_text):
@@ -135,12 +130,11 @@ func goose_handle_state():
 		goose_State.WELCOME:
 			print("WELCOME")
 			requestManager.welcome()
-			goose_current_state = goose_State.QUESTION1
+			goose_current_state = goose_State.QUESTION
 
-		goose_State.QUESTION1:
-			print("Q1")
+		goose_State.QUESTION:
 			print(inputted_text)
-			requestManager.question1(inputted_text)
+			requestManager.question(inputted_text)
 			await requestManager.request_completed
 			prev_answer = requestManager.prev_answer
 			await sig_inputted_text
@@ -150,20 +144,3 @@ func goose_handle_state():
 					requestManager.correct()
 				else:
 					requestManager.incorrect()
-				goose_current_state = goose_State.QUESTION2
-
-		goose_State.QUESTION2:
-			print("Q2")
-			print(inputted_text)
-			requestManager.question2(inputted_text)
-			await requestManager.request_completed
-			prev_answer = requestManager.prev_answer
-			await sig_inputted_text
-
-			if prev_answer != null:
-				if inputted_text.to_lower() in prev_answer.to_lower():
-					requestManager.correct()
-				else:
-					requestManager.incorrect()
-				goose_current_state = goose_State.QUESTION3
-

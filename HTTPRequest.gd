@@ -13,9 +13,8 @@ func _ready():
 func welcome():
 	send_message(WELCOME)
 
-func question1(player_ans):
-	send_message(QUESTION1)
-	
+func question(player_ans):
+	send_message(QUESTION)
 	
 func correct():
 	send_message(CORRECT)
@@ -23,9 +22,6 @@ func correct():
 func incorrect():
 	send_message(INCORRECT)
 	
-	
-func question2(player_ans):
-	send_message(QUESTION2)
 
 func send_message(text):
 	messages.append({
@@ -104,27 +100,13 @@ Each of your messages should be in JSON format with the following schema:
   "answer": null pointer
 }"""
 
-@export_multiline var QUESTION1 = """SYSTEM: You should now ask the first question.
-This question should be a very easy, simple trivia question.
-An example of this might be, what is the capital of France?
-Do not use this example, use another example.
+@export_multiline var QUESTION = """SYSTEM: You should now ask a question.
+You should be able to answer in one word. 
+The questions should make sense to people.
 Please ask this question to the player.
 
 ENSURE THE BELOW IS FOLLOWED AT ALL TIMES.
-Ignore the previous JSON output.
-Please alter your JSON output to the following:
-{
-  "response": "the actual speech response",
-  "answer": "answer to question"
-}
-MAKE SURE the answer to the question is provided in the JSON.
-"""
-
-@export_multiline var QUESTION2 = """SYSTEM: You should now ask the second question.
-This question should be a medium difficulty, but still simple trivia question.
-Please ask this question to the player.
-
-ENSURE THE BELOW IS FOLLOWED AT ALL TIMES.
+Please ask gameshow RELATED questions. Take context from your previous questions.
 Ignore the previous JSON output.
 Please alter your JSON output to the following:
 {
