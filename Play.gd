@@ -7,15 +7,21 @@ extends Button
 @onready var eyes = get_tree().get_root().get_node("Node3D/player/Eyes");
 @onready var goose = get_tree().get_root().get_node("Node3D/Goose");
 
+@onready var audience = get_tree().get_root().get_node("Node3D/Audience")
+@onready var applause = preload("res://assets/applause.wav")
+
 var music = preload("res://assets/gameshow.wav")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 func play_music():
-	if !$AudioStreamPlayer2D.is_playing():
-		$AudioStreamPlayer2D.stream = music
-		$AudioStreamPlayer2D.play()
+	if !$musicPlayer.is_playing():
+		$musicPlayer.stream = music
+		$musicPlayer.play()
+		audience.stream = applause
+		audience.play()
+
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
