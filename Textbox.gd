@@ -77,16 +77,20 @@ func _process(delta):
 				if Input.is_action_just_pressed("Enter") or label.visible_ratio >= 1:
 					label.visible_ratio = 1.0
 					end_symbol.text = "v"
+					Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 					text_change_state(text_State.FINISHED)
 			else:
-				overshoot *= 0.92
+				overshoot *= 0.75
 				var yP = get_viewport().size.y - textbox_container.get_rect().size.y - 30
 				textbox_container.position.y += (yP - overshoot - textbox_container.position.y) / 5
 
 		text_State.FINISHED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			if Input.is_action_just_pressed("Enter"):
 				text_change_state(text_State.READY)
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 				hide_textbox()
+
 
 func goose_talk():
 	while(true):

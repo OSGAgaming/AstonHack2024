@@ -25,13 +25,15 @@ func _process(delta):
 			player.position.z += delta
 			player.rotation.y -= 0.1 * delta
 		else:
+			play_music()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			Global.transitionAlpha = (3 -(playCouroutine - 3)) / 3
 			player.position.x = centerStage.position.x;
 			player.position.z = centerStage.position.z;
 			if playCouroutine >= 6:
 				Global.gameState = Global.GameState.Gameplay;
 				playCouroutineReady = false
-				play_music()
+
 
 	pass
 
