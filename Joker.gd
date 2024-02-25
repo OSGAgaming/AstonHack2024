@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 const description = "Looks like a playing card. Press [E] to interact";
-const outDescription = "A joker card. Press [E] to confirm"
+const outDescription = "A joker card."
 
 var within = false;
 var time = 0;
@@ -38,6 +38,7 @@ func _process(delta):
 				Global.inspecting = true;
 				Global.currentItem = outDescription
 				visible = false
+				Global.noOfItemsCollected += 1
 		else:
 			if within:
 				Global.currentDescription = "";

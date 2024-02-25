@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Global.inspectionID == 2:
+	if Global.inspectionID == 3:
 		var center = Vector2(get_viewport_rect().size.x / 2, get_viewport_rect().size.y / 2)
 		positionVel.x += (center.x - position.x) / 128 - positionVel.x/10
 		positionVel.y += (center.y - position.y) / 128 - positionVel.y/10

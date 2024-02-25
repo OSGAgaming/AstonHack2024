@@ -16,3 +16,5 @@ var inspectionID = -1;
 var currentDescription = "";
 var currentItem = "";
 
+var noOfItemsCollected = 0;
+

@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
 const description = "Looks like a bunch of formal documents. Press [E] to confirm";
-const outDescription = "A tenancy agreement under you and your significant other. Press [E] to confirm"
+const outDescription = "A decleration of death under your name."
 
 var within = false;
 var time = 0;
@@ -38,6 +38,7 @@ func _process(delta):
 				Global.inspecting = true;
 				Global.currentItem = outDescription
 				visible = false
+				Global.noOfItemsCollected += 1
 		else:
 			if within:
 				Global.currentDescription = "";
