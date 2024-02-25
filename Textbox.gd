@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 const CHAR_READ_RATE = 0.05
+const TIME_BETWEEN_QUESTIONS = 5
+var Time_left_between_questions = 0
 
 @onready var textbox_container = $TextboxContainer
 @onready var start_symbol = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/Start
@@ -61,15 +63,16 @@ func _ready():
 func _process(delta):
 	match text_current_state:
 		text_State.READY:
-			if !text_queue.is_empty() && Global.gameState == Global.GameState.Gameplay:
-				label.text = ""
-				display_text()
+			input_txtBox.release_focus()
+			if Time_left_between_questions > 0:
+				Time_left_between_questions -= delta
+			if !text_queue.is_empty() && Global.gameState == Global.GameState.Gameplay and Time_left_between_questions <= 0:
 				overshoot = 50
-				textbox_container.position.y += (1000 - textbox_container.position.y) / 5
-			else:
-				textbox_container.position.y += (1000 - textbox_container.position.y) / 5
+				display_text()
+			textbox_container.position.y += (1000 - textbox_container.position.y) / 5
 		text_State.READING:
 			if overshoot < 0.1:
+				Global.focused = true
 				label.visible_ratio += delta
 				if should_playsound():
 					playsound()
@@ -87,28 +90,27 @@ func _process(delta):
 		text_State.FINISHED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			if Input.is_action_just_pressed("Enter"):
+				Global.focused = false
 				text_change_state(text_State.READY)
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+				Time_left_between_questions = TIME_BETWEEN_QUESTIONS
 				hide_textbox()
-
-
 func goose_talk():
 	while(true):
 		goose_handle_state()
 		await requestManager.request_completed
 		queue_text(requestManager.prev_response)
-		input_txtBox.grab_focus()
+		
 		await sig_inputted_text
 
 func queue_text(next_text):
-	Global.focused = true
 	text_queue.push_back(next_text)
 
 func hide_textbox():
 	start_symbol.text = ""
 	end_symbol.text = ""
 	label.text = ""
-	textbox_container.hide()
+	#textbox_container.hide()
 
 func show_textbox():
 	start_symbol.text = "*"
@@ -123,7 +125,9 @@ func display_text():
 
 func text_change_state(text_next_state):
 	if text_next_state == text_State.FINISHED:
+		await get_tree().process_frame
 		input_txtBox.grab_focus()
+
 	text_current_state = text_next_state
 
 func goose_handle_state():
@@ -139,7 +143,6 @@ func goose_handle_state():
 			requestManager.question1(inputted_text)
 			await requestManager.request_completed
 			prev_answer = requestManager.prev_answer
-			input_txtBox.grab_focus()
 			await sig_inputted_text
 
 			if prev_answer != null:
@@ -155,7 +158,6 @@ func goose_handle_state():
 			requestManager.question2(inputted_text)
 			await requestManager.request_completed
 			prev_answer = requestManager.prev_answer
-			input_txtBox.grab_focus()
 			await sig_inputted_text
 
 			if prev_answer != null:
