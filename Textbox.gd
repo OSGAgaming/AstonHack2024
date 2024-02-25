@@ -33,6 +33,24 @@ var text_current_state = text_State.READY
 var goose_current_state = goose_State.WELCOME
 var text_queue = []
 
+var honks = [
+	preload("res://assets/honk/honk1.wav"),
+	preload("res://assets/honk/honk2.wav"),
+	preload("res://assets/honk/honk3.wav"),
+	preload("res://assets/honk/honk4.wav"),
+	preload("res://assets/honk/honk5.wav")
+	]
+
+func playsound():
+		$AudioStreamPlayer2D.stream = honks.pick_random()
+		$AudioStreamPlayer2D.play()
+
+func should_playsound():
+	var text = label.text
+	var index = floor(label.visible_ratio * len(text))
+	if index >= len(text):
+		index = len(text) - 1
+	return text[index] in [ "a", "e", "i", "o", "u"]
 
 func _ready():
 	hide_textbox()
@@ -53,6 +71,9 @@ func _process(delta):
 		text_State.READING:
 			if overshoot < 0.1:
 				label.visible_ratio += delta
+				if should_playsound():
+					playsound()
+
 				if Input.is_action_just_pressed("Enter") or label.visible_ratio >= 1:
 					label.visible_ratio = 1.0
 					end_symbol.text = "v"
