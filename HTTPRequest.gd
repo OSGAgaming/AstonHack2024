@@ -13,9 +13,15 @@ func _ready():
 func welcome():
 	send_message(WELCOME)
 
-func question(player_ans):
+func question():
 	send_message(QUESTION)
 
+func nonsensical(player_ans):
+	send_message(player_ans + NONSENSICAL)
+	
+func freereign(player_ans):
+	send_message(player_ans + FREEREIGN)
+	
 func correct():
 	send_message(CORRECT)
 	
@@ -115,6 +121,27 @@ Please alter your JSON output to the following:
 }
 MAKE SURE the answer to the question is provided in the JSON.
 """
+
+@export_multiline var NONSENSICAL = """SYSTEM: Start making less sense. 
+Give the player nonsensical questions that they cannot answer.
+
+Make sure to follow the format:
+{
+  "response": "the actual speech response",
+  "answer": null pointer
+}	"""
+
+@export_multiline var FREEREIGN = """SYSTEM: Keep the same prompts but
+there is no need for specific questions as described before.
+Make sure to acknowledge all of the player's prompts and give 
+them responses, while still being the gameshow host.
+The key thing is that the gameshow cannot end.
+
+Make sure to follow the format:
+{
+  "response": "the actual speech response",
+  "answer": null pointer
+}	"""
 
 @export_multiline var CORRECT = """SYSTEM: Congratulate the player on getting the answer to the previous question correct.
 

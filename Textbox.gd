@@ -27,9 +27,14 @@ enum text_State {
 enum goose_State {
 	WELCOME,
 	QUESTION,
-	RESULTS
+	NONSENSICAL,
+	FREEREIGN
 }
 
+var curr_questions = 1
+var max_questions = 3
+var curr_nonsensical = 1
+var max_nonsensical = 2
 var text_current_state = text_State.READY
 var goose_current_state = goose_State.WELCOME
 var text_queue = []
@@ -138,13 +143,43 @@ func text_change_state(text_next_state):
 func goose_handle_state():
 	match goose_current_state:
 		goose_State.WELCOME:
-			print("WELCOME")
 			requestManager.welcome()
 			goose_current_state = goose_State.QUESTION
 
 		goose_State.QUESTION:
-			print(inputted_text)
-			requestManager.question(inputted_text)
+			curr_questions += 1
+			requestManager.question()
+			await requestManager.request_completed
+			prev_answer = requestManager.prev_answer
+			await sig_inputted_text
+
+			if prev_answer != null:
+				if inputted_text.to_lower() in prev_answer.to_lower():
+					requestManager.correct()
+					play_applause()
+				else:
+					requestManager.incorrect()
+				if curr_questions > max_questions:
+					goose_current_state = goose_State.NONSENSICAL
+		
+		goose_State.NONSENSICAL:
+			curr_nonsensical += 1
+			requestManager.nonsensical(inputted_text)
+			await requestManager.request_completed
+			prev_answer = requestManager.prev_answer
+			await sig_inputted_text
+
+			if prev_answer != null:
+				if inputted_text.to_lower() in prev_answer.to_lower():
+					requestManager.correct()
+					play_applause()
+				else:
+					requestManager.incorrect()
+				if curr_nonsensical > max_nonsensical:
+					goose_current_state = goose_State.FREEREIGN
+					
+		goose_State.FREEREIGN:
+			requestManager.freereign(inputted_text)
 			await requestManager.request_completed
 			prev_answer = requestManager.prev_answer
 			await sig_inputted_text
