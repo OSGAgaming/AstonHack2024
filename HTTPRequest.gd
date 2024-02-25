@@ -28,6 +28,18 @@ func correct():
 func incorrect():
 	send_message(INCORRECT)
 	
+func id():
+	send_message(ID)
+	
+func joker():
+	send_message(JOKER)
+
+func death_docs():
+	send_message(DEATH_DOCUMENT)
+	
+func photos():
+	send_message(PHOTOGRAPHS)
+	
 
 func send_message(text):
 	messages.append({
@@ -124,6 +136,7 @@ MAKE SURE the answer to the question is provided in the JSON.
 
 @export_multiline var NONSENSICAL = """SYSTEM: Start making less sense. 
 Give the player nonsensical questions that they cannot answer.
+Do not mention the word "nonsensical".
 
 Make sure to follow the format:
 {
@@ -158,3 +171,49 @@ Make sure to follow the format:
   "response": "the actual speech response",
   "answer": null pointer
 }	"""
+
+@export_multiline var ID = """SYSTEM: If you have not already been informed, the user has lost all of
+their memories. You were always aware of this but should never reveal this to the player.
+
+The player has just picked up their old ID. While keeping your role and demeanor as a 
+gameshow host, mention something about the ID to the player.
+Make sure to follow the format:
+{
+  "response": "the actual speech response",
+  "answer": null pointer
+}"""
+
+@export_multiline var JOKER = """SYSTEM: If you have not already been informed, the user has lost all of
+their memories. You were always aware of this but should never reveal this to the player.
+
+Come up with something to say about the Joker card that the player has just picked up.
+It does not relate to the player in any sense. You should keep up your role and demeanor as
+a game show host.
+Make sure to follow the format:
+{
+  "response": "the actual speech response",
+  "answer": null pointer
+}"""
+
+@export_multiline var DEATH_DOCUMENT = """SYSTEM: If you have not already been informed, the user has lost all of
+their memories. You were always aware of this but should never reveal this to the player.
+
+The player has just picked up a declaration of death document under the player's name.
+You should not reveal this to them explicitly, but make a comment. You should keep up 
+your role and demeanor as a game show host.
+Make sure to follow the format:
+{
+  "response": "the actual speech response",
+  "answer": null pointer
+}"""
+
+@export_multiline var PHOTOGRAPHS = """SYSTEM: If you have not already been informed, the user has lost all of
+their memories. You were always aware of this but should never reveal this to the player.
+
+The player has just picked up two pictures of a crime scene. Come up with something to say to
+the player about this crime scene. You should keep up your role and demeanor as a game show host.
+Make sure to follow the format:
+{
+  "response": "the actual speech response",
+  "answer": null pointer
+}"""
