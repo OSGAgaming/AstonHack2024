@@ -11,6 +11,8 @@ var Time_left_between_questions = 0
 @onready var requestManager = $HTTPRequest
 @onready var input_txtBox = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/Panel/InputContainer/LineEdit
 @onready var portrait = $TextboxContainer/HBoxContainer/Panel2/Sprite2D
+@onready var audience = get_tree().get_root().get_node("Node3D/Audience")
+@onready var applause = preload("res://assets/applause.wav")
 
 signal sig_inputted_text
 var inputted_text = ""
@@ -41,8 +43,12 @@ var honks = [
 	]
 
 func playsound():
-		$AudioStreamPlayer2D.stream = honks.pick_random()
-		$AudioStreamPlayer2D.play()
+		$GooseAudio.stream = honks.pick_random()
+		$GooseAudio.play()
+
+func play_applause():
+		audience.stream = applause
+		audience.play()
 
 func should_playsound():
 	var text = label.text
@@ -94,6 +100,7 @@ func _process(delta):
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 				Time_left_between_questions = TIME_BETWEEN_QUESTIONS
 				hide_textbox()
+
 func goose_talk():
 	while(true):
 		goose_handle_state()
@@ -145,5 +152,6 @@ func goose_handle_state():
 			if prev_answer != null:
 				if inputted_text.to_lower() in prev_answer.to_lower():
 					requestManager.correct()
+					play_applause()
 				else:
 					requestManager.incorrect()

@@ -15,7 +15,7 @@ func welcome():
 
 func question(player_ans):
 	send_message(QUESTION)
-	
+
 func correct():
 	send_message(CORRECT)
 	
