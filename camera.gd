@@ -21,5 +21,5 @@ func _ready():
 
 
 func _process(delta):
-	face_target(player.position, 0.02)
+	face_target(player.position, 0.04)
 	
