@@ -18,3 +18,5 @@ var currentItem = "";
 
 var noOfItemsCollected = 0;
 var queueOfItemsPicked = []
+
+var screenShake = 0

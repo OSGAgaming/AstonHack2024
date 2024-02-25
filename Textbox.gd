@@ -3,7 +3,7 @@ extends CanvasLayer
 const CHAR_READ_RATE = 0.05
 const TIME_BETWEEN_QUESTIONS = 5
 var Time_left_between_questions = 0
-
+var timeAfterCompletion = 0
 @onready var textbox_container = $TextboxContainer
 @onready var start_symbol = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/Start
 @onready var end_symbol = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/End
@@ -69,6 +69,15 @@ func _ready():
 		goose_talk()
 
 func _process(delta):
+	if Global.noOfItemsCollected >= 4:
+		timeAfterCompletion += delta
+		if timeAfterCompletion >= 10:
+			Global.screenShake = (timeAfterCompletion - 10)/20
+			if Global.screenShake > 0.6:
+				Global.transitionAlpha += (1 - Global.transitionAlpha) / 16
+				if Global.transitionAlpha > 0.992:
+					get_tree().quit()
+
 	match text_current_state:
 		text_State.READY:
 			input_txtBox.release_focus()
@@ -141,6 +150,11 @@ func text_change_state(text_next_state):
 	text_current_state = text_next_state
 
 func goose_handle_state():
+	if Global.noOfItemsCollected >= 4:
+		text_queue.clear()
+		Time_left_between_questions = 0
+		queue_text("...")
+		return;
 	while Global.queueOfItemsPicked.size() != 0:
 		var item = Global.queueOfItemsPicked.pop_back()
 		var state;
