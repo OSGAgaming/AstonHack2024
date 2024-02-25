@@ -7,6 +7,7 @@ Date Of Birth: 05-04-1999"
 
 var within = false;
 var time = 0;
+var initY = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

@@ -10,6 +10,7 @@ var Time_left_between_questions = 0
 @onready var label = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/Label
 @onready var requestManager = $HTTPRequest
 @onready var input_txtBox = $TextboxContainer/HBoxContainer/Panel/MarginContainer/VBoxContainer/Panel/InputContainer/LineEdit
+@onready var portrait = $TextboxContainer/HBoxContainer/Panel2/Sprite2D
 
 signal sig_inputted_text
 var inputted_text = ""
@@ -70,6 +71,7 @@ func _process(delta):
 			if overshoot < 0.1:
 				Global.focused = true
 				label.visible_ratio += delta
+				portrait.get_child(0).play("yap")
 				if should_playsound():
 					playsound()
 
@@ -78,6 +80,7 @@ func _process(delta):
 					end_symbol.text = "v"
 					Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 					text_change_state(text_State.FINISHED)
+					portrait.get_child(0).play("idle")
 			else:
 				overshoot *= 0.75
 				var yP = get_viewport().size.y - textbox_container.get_rect().size.y - 30
