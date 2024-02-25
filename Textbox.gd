@@ -12,15 +12,27 @@ const CHAR_READ_RATE = 0.05
 signal sig_inputted_text
 var inputted_text = ""
 var overshoot = 0
+var prev_answer = ""
 
-enum State {
+enum text_State {
 	READY,
 	READING,
 	FINISHED
 }
+enum goose_State {
+	WELCOME,
+	QUESTION1,
+	ANS_QUESTION1,
+	QUESTION2,
+	ANS_QUESTION2,
+	QUESTION3,
+	RESULTS
+}
 
-var current_state = State.READY
+var text_current_state = text_State.READY
+var goose_current_state = goose_State.WELCOME
 var text_queue = []
+
 
 func _ready():
 	hide_textbox()
@@ -29,8 +41,8 @@ func _ready():
 		goose_talk()
 
 func _process(delta):
-	match current_state:
-		State.READY:
+	match text_current_state:
+		text_State.READY:
 			if !text_queue.is_empty() && Global.gameState == Global.GameState.Gameplay:
 				label.text = ""
 				display_text()
@@ -38,41 +50,30 @@ func _process(delta):
 				textbox_container.position.y += (1000 - textbox_container.position.y) / 5
 			else:
 				textbox_container.position.y += (1000 - textbox_container.position.y) / 5
-		State.READING:
+		text_State.READING:
 			if overshoot < 0.1:
 				label.visible_ratio += delta
 				if Input.is_action_just_pressed("Enter") or label.visible_ratio >= 1:
 					label.visible_ratio = 1.0				
 					end_symbol.text = "v"
-					change_state(State.FINISHED)
+					text_change_state(text_State.FINISHED)
 			else:
 				overshoot *= 0.92
 				var yP = get_viewport().size.y - textbox_container.get_rect().size.y - 30
 				textbox_container.position.y += (yP - overshoot - textbox_container.position.y) / 5
 
-		State.FINISHED:
+		text_State.FINISHED:
 			if Input.is_action_just_pressed("Enter"):
-				change_state(State.READY)
+				text_change_state(text_State.READY)
 				hide_textbox()
 
-func goose_talk():
-	requestManager.prompt()
-	await requestManager.request_completed
-	queue_text(requestManager.prev_response)
-	input_txtBox.grab_focus()
-	await sig_inputted_text
-	requestManager.send_message("SYSTEM: Begin asking questions about the gameshow. Treat the following as if the user had just inputted: " + inputted_text)
-	await requestManager.request_completed
-	
+func goose_talk():	
 	while(true):
-		await get_tree().create_timer(1.0).timeout
-		requestManager.send_message(inputted_text)
+		goose_handle_state()
 		await requestManager.request_completed
 		queue_text(requestManager.prev_response)
-		print("Goose:", requestManager.prev_response)
 		input_txtBox.grab_focus()
 		await sig_inputted_text
-	
 
 func queue_text(next_text):
 	Global.focused = true
@@ -92,10 +93,50 @@ func display_text():
 	var next_text = text_queue.pop_front()
 	label.text = next_text
 	label.visible_ratio = 0.0
-	change_state(State.READING)
+	text_change_state(text_State.READING)
 	show_textbox()
 
-func change_state(next_state):
-	if next_state == State.FINISHED:
+func text_change_state(text_next_state):
+	if text_next_state == text_State.FINISHED:
 		input_txtBox.grab_focus()
-	current_state = next_state
+	text_current_state = text_next_state
+
+func goose_handle_state():
+	match goose_current_state:
+		goose_State.WELCOME:
+			print("WELCOME")
+			requestManager.welcome()
+			goose_current_state = goose_State.QUESTION1
+		
+		goose_State.QUESTION1:
+			print("Q1")
+			print(inputted_text)
+			requestManager.question1(inputted_text)
+			await requestManager.request_completed
+			prev_answer = requestManager.prev_answer
+			input_txtBox.grab_focus()
+			await sig_inputted_text
+			
+			if prev_answer != null:
+				if inputted_text.to_lower() in prev_answer.to_lower():
+					requestManager.correct()
+				else:
+					requestManager.incorrect()
+				goose_current_state = goose_State.QUESTION2
+				
+		goose_State.QUESTION2:
+			print("Q2")
+			print(inputted_text)
+			requestManager.question2(inputted_text)
+			await requestManager.request_completed
+			prev_answer = requestManager.prev_answer
+			input_txtBox.grab_focus()
+			await sig_inputted_text
+			
+			if prev_answer != null:
+				if inputted_text.to_lower() in prev_answer.to_lower():
+					requestManager.correct()
+				else:
+					requestManager.incorrect()
+				goose_current_state = goose_State.QUESTION3
+
