@@ -141,6 +141,31 @@ func text_change_state(text_next_state):
 	text_current_state = text_next_state
 
 func goose_handle_state():
+	while Global.queueOfItemsPicked.size() != 0:
+		var item = Global.queueOfItemsPicked.pop_back()
+		var state;
+		match item:
+			0:
+				requestManager.id()
+				await requestManager.request_completed
+				prev_answer = requestManager.prev_answer
+				await sig_inputted_text
+			1:
+				requestManager.photos()
+				await requestManager.request_completed
+				prev_answer = requestManager.prev_answer
+				await sig_inputted_text
+			2:
+				requestManager.joker()
+				await requestManager.request_completed
+				prev_answer = requestManager.prev_answer
+				await sig_inputted_text
+			3:
+				requestManager.death_docs()
+				await requestManager.request_completed
+				prev_answer = requestManager.prev_answer
+				await sig_inputted_text
+			
 	match goose_current_state:
 		goose_State.WELCOME:
 			requestManager.welcome()

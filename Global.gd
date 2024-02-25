@@ -17,4 +17,4 @@ var currentDescription = "";
 var currentItem = "";
 
 var noOfItemsCollected = 0;
-
+var queueOfItemsPicked = []

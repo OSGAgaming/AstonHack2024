@@ -40,6 +40,7 @@ func _process(delta):
 				Global.inspecting = true;
 				Global.currentItem = outDescription
 				Global.noOfItemsCollected += 1
+				Global.queueOfItemsPicked.append(0)
 				visible = false
 		else:
 			if within:

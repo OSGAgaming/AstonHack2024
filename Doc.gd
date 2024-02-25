@@ -39,6 +39,7 @@ func _process(delta):
 				Global.currentItem = outDescription
 				visible = false
 				Global.noOfItemsCollected += 1
+				Global.queueOfItemsPicked.append(3)
 		else:
 			if within:
 				Global.currentDescription = "";
