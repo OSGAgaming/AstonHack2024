@@ -1,9 +1,7 @@
 extends MeshInstance3D
 
-const description = "Looks like an id card";
-const outDescription = "You just picked up an id card with your \n
-Name: woiuhgwergrwef \n 
-Date Of Birth: 05-04-1999"
+const description = "Looks like a playing card";
+const outDescription = "A joker card"
 
 var within = false;
 var time = 0;

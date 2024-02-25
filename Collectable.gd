@@ -21,7 +21,7 @@ func _process(delta):
 		time += delta
 		if time > 3:
 			Global.transitionAlpha *= 0.9
-			print(Global.transitionAlpha )			
+
 			if Global.transitionAlpha < 0.1:
 
 				Global.currentItem = ""

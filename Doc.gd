@@ -1,7 +1,7 @@
 extends MeshInstance3D
 
-const description = "Looks like an bunch of pictures";
-const outDescription = "Pictures of a crime scene"
+const description = "Looks like a bunch of formal documents";
+const outDescription = "A tenancy agreement under you and your significant other"
 
 var within = false;
 var time = 0;
@@ -15,11 +15,11 @@ func _ready():
 func _process(delta):
 	if Global.currentItem == outDescription:
 
-		Global.inspectionID = 1;
+		Global.inspectionID = 3;
 		time += delta
 		if time > 3:
 			Global.transitionAlpha *= 0.9
-
+			print(Global.transitionAlpha )			
 			if Global.transitionAlpha < 0.1:
 
 				Global.currentItem = ""
