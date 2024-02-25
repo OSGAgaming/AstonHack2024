@@ -11,6 +11,7 @@ const CHAR_READ_RATE = 0.05
 
 signal sig_inputted_text
 var inputted_text = ""
+var overshoot = 0
 
 enum State {
 	READY,
@@ -23,20 +24,32 @@ var text_queue = []
 
 func _ready():
 	hide_textbox()
+	
 	if true:
 		goose_talk()
 
 func _process(delta):
 	match current_state:
 		State.READY:
-			if !text_queue.is_empty() && !Global.isGameMenu:
+			if !text_queue.is_empty() && Global.gameState == Global.GameState.Gameplay:
+				label.text = ""
 				display_text()
+				overshoot = 50
+				textbox_container.position.y += (1000 - textbox_container.position.y) / 5
+			else:
+				textbox_container.position.y += (1000 - textbox_container.position.y) / 5
 		State.READING:
-			label.visible_ratio += delta
-			if Input.is_action_just_pressed("Enter") or label.visible_ratio >= 1:
-				label.visible_ratio = 1.0
-				end_symbol.text = "v"
-				change_state(State.FINISHED)
+			if overshoot < 0.1:
+				label.visible_ratio += delta
+				if Input.is_action_just_pressed("Enter") or label.visible_ratio >= 1:
+					label.visible_ratio = 1.0				
+					end_symbol.text = "v"
+					change_state(State.FINISHED)
+			else:
+				overshoot *= 0.92
+				var yP = get_viewport().size.y - textbox_container.get_rect().size.y - 30
+				textbox_container.position.y += (yP - overshoot - textbox_container.position.y) / 5
+
 		State.FINISHED:
 			if Input.is_action_just_pressed("Enter"):
 				change_state(State.READY)
